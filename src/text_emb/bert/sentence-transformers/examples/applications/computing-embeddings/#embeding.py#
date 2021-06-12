@@ -1,0 +1,72 @@
+from sentence_transformers import SentenceTransformer
+#model = SentenceTransformer('paraphrase-distilroberta-base-v1')
+model = SentenceTransformer('paraphrase-xlm-r-multilingual-v1')
+
+content = []
+for k in range(1,8):
+    files = "datav3\\" + str(k) + ".txt"
+    f1 = open(files, encoding='utf-8', errors='ignore')             
+    line = f1.readline()
+    while line: 
+        line = line.strip('\n')
+        item = str(line)
+        content.append(item)
+        line = f1.readline()
+    print (len(content))
+
+files = "datav3\\0.txt"
+f1 = open(files, encoding='utf-8', errors='ignore')             
+line = f1.readline()
+while line: 
+    line = line.strip('\n')
+    item = str(line)
+    content.append(item)
+    line = f1.readline()
+print (len(content))
+sentence_embeddings = model.encode(content)
+
+with open("data9.txt", 'w') as fw:
+    n = 0
+    for sentence, embedding in zip(content, sentence_embeddings):
+        if n>=0 and n<1254:
+            fw.write ('1:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=1254 and n<2378:
+            fw.write ('2:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=2378 and n<3275:
+            fw.write ('3:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=3275 and n<6130:
+            fw.write ('4:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=6130 and n<6498:
+            fw.write ('5:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=6498 and n<6754:
+            fw.write ('6:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=6754 and n<6965:
+            fw.write ('7:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        if n>=6965 and n<20895:
+            fw.write ('0:')
+            for k in embedding:
+                fw.write ('%s,'%(k))
+            fw.write ('\n')
+        n += 1
+
